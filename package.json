@@ -1,0 +1,105 @@
+{
+    "name": "belt-large-screen-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@ant-design/icons": "^5.1.4",
+        "@ant-design/plots": "^1.2.5",
+        "@craco/craco": "^7.1.0",
+        "@dubhe/core": "latest",
+        "@moensun/antd-icons-react-ext": "latest",
+        "@moensun/antd-react-ext": "latest",
+        "@stomp/stompjs": "^7.0.0",
+        "@testing-library/jest-dom": "^5.14.1",
+        "@testing-library/react": "^13.0.0",
+        "@testing-library/user-event": "^13.2.1",
+        "@types/jest": "^27.0.1",
+        "@types/node": "^16.7.13",
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        "@types/sockjs-client": "^1.5.3",
+        "ahooks": "^3.7.8",
+        "antd": "^5.7.1",
+        "axios": "^1.4.0",
+        "cesium": "^1.116.0",
+        "classnames": "^2.3.2",
+        "craco-cesium": "^1.2.0",
+        "craco-less": "^3.0.1",
+        "dayjs": "^1.11.9",
+        "flv.js": "^1.6.2",
+        "js-cookie": "^3.0.5",
+        "localforage": "^1.10.0",
+        "lodash": "^4.17.21",
+        "match-sorter": "^6.3.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.14.2",
+        "react-scripts": "5.0.1",
+        "sockjs-client": "^1.6.1",
+        "sort-by": "^1.2.0",
+        "typescript": "^4.4.2",
+        "web-vitals": "^2.1.0"
+    },
+    "scripts": {
+        "start": "craco start",
+        "build": "craco build",
+        "test": "craco test",
+        "eject": "react-scripts eject",
+        "prepare": "husky install",
+        "lint-staged": "lint-staged",
+        "check:types": "tsc --project tsconfig.json --noEmit",
+        "format": "prettier --write \"**/*.{ts,tsx,js,json,css,less}\""
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest",
+            "prettier"
+        ],
+        "rules": {
+            "prettier/prettier": [
+                "error",
+                {
+                    "endOfLine": "auto"
+                }
+            ],
+            "react-hooks/exhaustive-deps": "off"
+        },
+        "plugins": [
+            "prettier"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@ant-design/cssinjs": "^1.6.1",
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@commitlint/cli": "^17.6.6",
+        "@commitlint/config-conventional": "^17.6.6",
+        "@types/js-cookie": "^3.0.3",
+        "@types/lodash": "^4.14.195",
+        "eslint": "8.22.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-config-react-app": "^7.0.1",
+        "eslint-plugin-prettier": "^5.0.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.2.3",
+        "prettier": "3.0.0"
+    },
+    "lint-staged": {
+        "src/{**/*,*}.{js,ts,jsx,tsx}": [
+            "prettier --write",
+            "eslint --fix"
+        ]
+    }
+}
