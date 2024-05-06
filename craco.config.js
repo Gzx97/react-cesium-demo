@@ -34,7 +34,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         port: 3105,
-        open: false,
+        open: true,
         compress: true,
         proxy: {
             '/api/*': {
