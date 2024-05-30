@@ -9,7 +9,7 @@ import {
 } from 'cesium';
 import * as Cesium from 'cesium';
 import ICON from '@/images/blockage.svg';
-import modifyMap from '@/commons/util/filterColor';
+import { setTimeout } from 'timers/promises';
 /** https://ion.cesium.com/tokens 去创建token  */
 const CESIUM_TOKEN = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmMWU3OTBlYy0xMzIzLTQ4ZGMtYTUxZi03NDNkZjgzNWU3N2YiLCJpZCI6MjExOTY0LCJpYXQiOjE3MTQzNjc3MDh9.dOpvTpETE5LIU5JGfwuFBlZEjMomlApWN_ZyWFjSg7I`;
 const pointInfo = [
@@ -176,13 +176,43 @@ const CesiumDemo: React.FC = () => {
                 outlineColor: Cesium.Color.YELLOW, // 配置 设置外边框线颜色
             },
         });
-        addGLTF();
-        modifyMap(viewer, {
-            //反色?
-            invertColor: true,
-            //滤镜值
-            filterRGB: [60, 145, 172],
-        });
+        add3DTiles();
+        // addGLTF();
+        // //加载3dTiles文件
+        // const tileset = await Cesium.Cesium3DTileset.fromUrl(
+        //     'https://data.mars3d.cn/3dtiles/qx-dyt/tileset.json',
+        //     {
+        //         skipLevelOfDetail: true,
+        //         baseScreenSpaceError: 1024,
+        //         skipScreenSpaceErrorFactor: 16,
+        //         skipLevels: 1,
+        //         immediatelyLoadDesiredLevelOfDetail: false,
+        //         loadSiblings: false,
+        //         cullWithChildrenBounds: true,
+        //     }
+        // );
+        // //添加到地图上，定位到苏州人工智能产业园
+        // viewer.scene.primitives.add(tileset);
+        // //加载完成后缩放到模型位置
+        // viewer.zoomTo(tileset);
+        // console.log(tileset);
+    };
+    //加载3dTiles文件
+    const add3DTiles = async () => {
+        const viewer = csmViewerRef.current!;
+        let translation = Cesium.Cartesian3.fromArray([0, 0, 0]);
+        let m = Cesium.Matrix4.fromTranslation(translation);
+        const url = 'http://data.mars3d.cn/3dtiles/max-fsdzm/tileset.json';
+        try {
+            const tileset = await Cesium.Cesium3DTileset.fromUrl(url, {
+                modelMatrix: m,
+                show: true, // 是否显示图块集(默认true)
+            });
+            viewer.scene.primitives.add(tileset);
+            viewer.flyTo(tileset);
+        } catch (error) {
+            console.error(`Error creating tileset: ${error}`);
+        }
     };
 
     const addGLTF = () => {
