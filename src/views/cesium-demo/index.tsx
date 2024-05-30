@@ -9,6 +9,7 @@ import {
 } from 'cesium';
 import * as Cesium from 'cesium';
 import ICON from '@/images/blockage.svg';
+import modifyMap from '@/commons/util/filterColor';
 /** https://ion.cesium.com/tokens 去创建token  */
 const CESIUM_TOKEN = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmMWU3OTBlYy0xMzIzLTQ4ZGMtYTUxZi03NDNkZjgzNWU3N2YiLCJpZCI6MjExOTY0LCJpYXQiOjE3MTQzNjc3MDh9.dOpvTpETE5LIU5JGfwuFBlZEjMomlApWN_ZyWFjSg7I`;
 const pointInfo = [
@@ -144,6 +145,7 @@ const CesiumDemo: React.FC = () => {
                 url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
             })
         );
+
         // 设置初始位置  Cesium.Cartesian3.fromDegrees(longitude, latitude, height, ellipsoid, result)
         const boundingSphere = new BoundingSphere(
             Cartesian3.fromDegrees(120.775997, 31.292397, 100), //苏州人工智能产业园
@@ -175,7 +177,14 @@ const CesiumDemo: React.FC = () => {
             },
         });
         addGLTF();
+        modifyMap(viewer, {
+            //反色?
+            invertColor: true,
+            //滤镜值
+            filterRGB: [60, 145, 172],
+        });
     };
+
     const addGLTF = () => {
         const viewer = csmViewerRef.current!;
         // 指定模型的URI（这里假设你有一个名为'myModel.gltf'的模型文件）
